@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Access Practice</title>
+  </head>
+  <body>
+    <main>
+      <!-- HEADER -->
+      <header>
+        <h1 id="main-title" class="title">DOM Access Demo</h1>
+        <p class="description">Practice selecting and manipulating elements</p>
+      </header>
+
+      <!-- SECTION: ID EXAMPLES -->
+      <section>
+        <h2>getElementById</h2>
+        <p id="intro-text">This text can be accessed using an ID.</p>
+        <button id="btn-change-text">Change Text</button>
+      </section>
+
+      <!-- SECTION: CLASS EXAMPLES -->
+      <section>
+        <h2>getElementsByClassName</h2>
+        <p class="item">Item 1</p>
+        <p class="item">Item 2</p>
+        <p class="item">Item 3</p>
+      </section>
+
+      <!-- SECTION: TAG NAME EXAMPLES -->
+      <section>
+        <h2>getElementsByTagName</h2>
+        <ul>
+          <li>Apple</li>
+          <li>Banana</li>
+          <li>Orange</li>
+        </ul>
+      </section>
+
+      <!-- SECTION: QUERY SELECTOR -->
+      <section>
+        <h2>querySelector / querySelectorAll</h2>
+        <div class="box" id="box-1">Box 1</div>
+        <div class="box" id="box-2">Box 2</div>
+        <div class="box special">Box 3</div>
+      </section>
+
+      <!-- SECTION: FORM -->
+      <section>
+        <h2>Form عناصر (Form Elements)</h2>
+        <form id="user-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" />
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+
+      <!-- SECTION: DATA ATTRIBUTES -->
+      <section>
+        <h2>Data Attributes</h2>
+        <button data-role="admin" class="user-btn">Admin</button>
+        <button data-role="guest" class="user-btn">Guest</button>
+      </section>
+
+      <!-- SECTION: NESTED ELEMENTS -->
+      <section>
+        <h2>Nested Elements</h2>
+        <div id="parent">
+          <p class="child">Child 1</p>
+          <p class="child">Child 2</p>
+        </div>
+      </section>
+
+      <!-- SECTION: IMAGE -->
+      <section>
+        <h2>Attributes Manipulation</h2>
+        <img
+          id="main-image"
+          src="https://via.placeholder.com/150"
+          alt="Placeholder Image"
+        />
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
