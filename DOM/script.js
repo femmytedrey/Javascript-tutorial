@@ -15,16 +15,19 @@
 // btn.addEventListener("click", changeTitle)
 
 const selectItem = document.querySelectorAll(".item");
+const changeItemBtn = document.querySelector("#change-item");
 
-selectItem.forEach((item) => {
-  const textContent = item.textContent;
-  if (textContent === "Item 1") {
-    item.innerHTML = `${item.innerHTML} is item 1`;
-  } else if (textContent === "Item 2") {
-    item.innerHTML = `${item.innerHTML} is item 2`;
-  } else if (textContent === "Item 3") {
-    item.innerHTML = `${item.innerHTML} is item 3`;
-  }
+changeItemBtn.addEventListener("click", () => {
+  selectItem.forEach((item) => {
+    const textContent = item.textContent;
+    if (textContent === "Item 1") {
+      item.textContent = `${item.textContent} is item 1`;
+    } else if (textContent === "Item 2") {
+      item.textContent = `${item.textContent} is item 2`;
+    } else if (textContent === "Item 3") {
+      item.textContent = `${item.textContent} is item 3`;
+    }
+  });
 });
 
 // assignment:  the forEach above, put it in a click event listener, so that the text only changes when you click a button.

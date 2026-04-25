@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .btn.active {
+        background-color: #0056b3;
+      }
+      .btn.highlighted {
+        background-color: #28a745;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <!-- <div class="card">
+            <h1>New Card</h1>
+            <p>Card description</p>
+        </div> -->
+
+      <button class="btn">Click me</button>
+
+      <form data-id="formId" action="">
+        <label for="firstName">My name</label>
+
+        <input type="text" placeholder="enter your name" value="Ade" id="firstName" />
+
+        <butto class="submitform"> Submit Form</button>
+      </form>
+    </main>
+
+    <div class="btn-container">
+        <button>btn 1</button>
+        <button class="delete">delete btn</button>
+        <button>btn 3</button>
+    </div>
+
+    <!-- Counter Assignment: Counter value must not be more than 20, it must not go below 0 -->
+    <div class="flex">
+        <button>Decrement</button>
+        <p>0</p> 
+        <button>Increment</button>
+    </div>
+
+    <script src="./example.js"></script>
+  </body>
+</html>
