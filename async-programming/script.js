@@ -120,12 +120,47 @@ function getComments(post) {
 //     console.error(err);
 //   });
 
-Promise.all([getUser(1), getPosts(1), getComments(1)])
-  .then(([user, posts, comments]) => {
-    console.log("user: ", user);
-    console.log("posts: ", posts);
-    console.log("comments: ", comments);
-  })
-  .catch((err) => {
-    console.log("Something went wrong", err);
-  });
+// const loadUser = () =>
+//   Promise.all([getUser(1), getPosts(1), getComments(1)])
+//     .then(([user, posts, comments]) => {
+//       console.log("user: ", user);
+//       console.log("posts: ", posts);
+//       console.log("comments: ", comments);
+//     })
+//     .catch((err) => {
+//       console.log("Something went wrong", err);
+//     });
+
+// async function doSomething() {
+//   // setLoading(true)
+//   try {
+//     throw new Error("something went wrong");
+//     const user = await loadUser();
+//     console.log(user);
+//   } catch (error) {
+//     console.log("this is error block");
+//     console.log(error);
+//   } finally {
+//     // setLoading(false)
+//   }
+// }
+
+// doSomething()
+
+async function fetchUsers() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(`HTTP error: ${response.status}`)
+    }
+
+    console.log(data[0]);
+  } catch (error) {
+    console.log("Fetch failed: ", error.message)
+  }
+}
+
+console.log(fetchUsers());
+// console.log(["item1", "item2"].join("AAA"))

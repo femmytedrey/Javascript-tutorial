@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts from API</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        color: #1a1a1a;
+        padding: 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #1b3a5c;
+      }
+
+      /* ── Loading state ── */
+      #loading {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #666;
+        padding: 3rem;
+      }
+
+      /* ── Error state ── */
+      #error {
+        display: none; /* hidden by default */
+        background: #ffe0e0;
+        color: #c62828;
+        border: 1px solid #ef9a9a;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      /* ── Posts container ── */
+      #posts-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* ── Individual post card ── */
+      .post-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #2e75b6;
+      }
+
+      .post-card .post-id {
+        font-size: 0.75rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+      }
+
+      .post-card h2 {
+        font-size: 1rem;
+        color: #1b3a5c;
+        margin-bottom: 0.75rem;
+        text-transform: capitalize;
+      }
+
+      .post-card p {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Latest Posts</h1>
+
+    <!-- Loading message — visible while data is loading -->
+    <div id="loading">Loading posts...</div>
+
+    <!-- Error message — hidden unless something goes wrong -->
+    <div id="error"></div>
+
+    <!-- Empty container — JavaScript fills this with post cards -->
+    <div id="posts-container"></div>
+
+    <!-- JavaScript always goes at the bottom, before </body> -->
+    <script src="posts.js"></script>
+  </body>
+</html>
