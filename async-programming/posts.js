@@ -2,6 +2,16 @@ const loadingE1 = document.querySelector("#loading");
 const errorE1 = document.querySelector("#error");
 const containerE1 = document.querySelector("#posts-container");
 
+// const users = [
+//   {
+//     id: 1,
+//     firstName: "John",
+//     isActive: true,
+//     toggleUserStatus: () => {},
+//     dob: undefined,
+//   },
+// ];
+
 function showLoading() {
   loadingE1.style.display = "block";
   errorE1.style.display = "none";
@@ -26,6 +36,20 @@ function renderPosts(posts) {
             <div class="post-id">Post #${post.id}</div>
             <h2>${post.title}</h2>
             <p>${post.body}</p>
+
+            <div class="comments">
+                <h4>Comments (${post.comments.length})</h4>
+                ${post.comments
+                  .map(
+                    (c) => `
+                    <div class="comment">
+                        <strong>${c.name}</strong>
+                        <p>${c.body}</p>
+                    </div>
+                  `,
+                  )
+                  .join("")}
+            </div>
         </div>
     `,
     )
@@ -52,8 +76,19 @@ async function loadPosts() {
       return;
     }
 
+    const postsWithComments = await Promise.all(
+      posts.map(async (post) => {
+        const res = await fetch(
+          `https://jsonplaceholder.typicode.com/posts/${post.id}/comments`,
+        );
+        const comments = await res.json();
+
+        return { ...post, comments };
+      }),
+    );
+
     hideLoading();
-    renderPosts(posts);
+    renderPosts(postsWithComments);
   } catch (error) {
     showError(error.message);
     console.log("Fetch error: ", error.message);
