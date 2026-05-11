@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        /* background: linear-gradient(135deg, #1b3a5c 0%, #2e75b6 100%); */
+        background: #2e75b6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 420px;
+        color: white;
+      }
+
+      /* ── Search bar ── */
+      .search-bar {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .search-bar input {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        border: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        font-size: 1rem;
+      }
+
+      .search-bar input::placeholder {
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .search-bar input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .search-bar button {
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 25px;
+        background: white;
+        color: #1b3a5c;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .search-bar button:hover {
+        background: #e8f0f8;
+      }
+
+      /* ── Status / error message ── */
+      #status {
+        text-align: center;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+        min-height: 1.5em;
+        margin-bottom: 0.5rem;
+      }
+
+      #status.error {
+        color: #ffcccc;
+      }
+
+      /* ── Weather result area — hidden until data loads ── */
+      #weather-result {
+        display: none;
+      }
+
+      /* ── City name and country ── */
+      .location {
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .location h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      .location .country {
+        font-size: 1rem;
+        opacity: 0.75;
+      }
+
+      /* ── Main weather display ── */
+      .weather-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+
+      .weather-main img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .weather-main .temp {
+        font-size: 4rem;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .weather-main .unit {
+        font-size: 1.5rem;
+        opacity: 0.8;
+      }
+
+      .description {
+        text-align: center;
+        font-size: 1.1rem;
+        text-transform: capitalize;
+        opacity: 0.9;
+        margin-bottom: 1.5rem;
+      }
+
+      /* ── Stats grid ── */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        text-align: center;
+      }
+
+      .stat-box .stat-label {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-box .stat-value {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <!-- Search input and button -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="Enter city name..."
+          autocomplete="off"
+        />
+        <button id="search-btn">Search</button>
+      </div>
+
+      <!-- Status messages: "Searching...", error messages -->
+      <div id="status"></div>
+
+      <!-- Weather result — hidden until a successful fetch -->
+      <div id="weather-result">
+        <!-- City name and country code -->
+        <div class="location">
+          <h2 id="city-name"></h2>
+          <div class="country" id="country-code"></div>
+        </div>
+
+        <!-- Weather icon, temperature, and description -->
+        <div class="weather-main">
+          <img id="weather-icon" src="" alt="Weather icon" />
+          <div>
+            <span class="temp" id="temperature"></span>
+            <span class="unit">°C</span>
+          </div>
+        </div>
+
+        <div class="description" id="weather-description"></div>
+
+        <!-- Four detail boxes: feels like, humidity, wind, pressure -->
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Feels Like</div>
+            <div class="stat-value" id="feels-like"></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Humidity</div>
+            <div class="stat-value" id="humidity"></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Wind</div>
+            <div class="stat-value" id="wind-speed"></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Pressure</div>
+            <div class="stat-value" id="pressure"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
